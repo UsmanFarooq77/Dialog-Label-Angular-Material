@@ -2,26 +2,27 @@
     <form>
         <div *ngIf="(isLabelActive && last) || isEditActive">
             <mat-form-field appearance="standard">
-                <input matInput [formControl]="name" #lableItem>
+                <input matInput [formControl]="name" #lableItem />
                 <mat-error *ngIf="isError">
                     Label is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
-            <button (click)="saveLabel(lableItem.value, index)" matSuffix mat-icon-button aria-label="">
-                <mat-icon>check_circle</mat-icon>
+            <button mat-button class="check_circle_button" (click)="saveLabel(lableItem.value, index)" aria-label="">
+                <mat-icon>check_circle</mat-icon>&nbsp;
             </button>
-            <button (click)="cancelLabel(index)" matSuffix mat-icon-button aria-label="">
+            <button class="cancel_button" (click)="cancelLabel(index)" matSuffix mat-icon-button aria-label="">
                 <mat-icon>cancel</mat-icon>
             </button>
         </div>
-        <mat-checkbox *ngIf="!isLabelActive || !last" [disabled]="labelDialog.isEdit" class="checkbox_hover"
+        <mat-checkbox *ngIf="!isLabelActive || !last" [disabled]="label.isEdit" class="checkbox_hover"
             color="primary" [checked]="label.selected">{{ label.name }}
 
             <span class="edit_delete">
-                <button matSuffix mat-icon-button aria-label="" (click)="editLabel(label.name,index)">
+                <button class="mode_edit_button" matSuffix mat-icon-button aria-label=""
+                    (click)="editLabel(label.name, index)">
                     <mat-icon matSuffix>mode_edit</mat-icon>
                 </button>
-                <button matSuffix mat-icon-button aria-label="" (click)="deleteLabel(index)">
+                <button class="delete_button" matSuffix mat-icon-button aria-label="" (click)="deleteLabel(index)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </span>
