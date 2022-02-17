@@ -1,0 +1,20 @@
+<div fxLayout="column" fxFlexFill>
+    <div fxLayout="row">
+        <h1 mat-dialog-title>Title</h1>
+    </div>
+    <div fxLayoutAlign="end start">
+        <button [disabled]="isLabelActive" mat-button (click)="newLabel()">Add</button>
+    </div>
+    <div fxLayout="column" fxFlex="100">
+        <ng-container *ngFor="let label of labels; let last=last; let index=index;">
+            <app-labels-dialog-item [isLabelActive]="isLabelActive" [last]="last" [label]="label" [index]="index"
+                (addLabel)="addLabel($event)" (isEdit)="isEdit($event)" (removeLabel)="removeLabel($event)"></app-labels-dialog-item>{{index}}
+        </ng-container>
+    </div>
+    <div fxLayoutAlign="end start">
+        <div mat-dialog-actions>
+            <button mat-button (click)="onNoClick()">Cancel</button>
+            <button mat-button color="primary" (click)="saveAllLabels">Ok</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+
+.edit_delete{
+    display: none;
+}
+.checkbox_hover:hover .edit_delete {
+    display: inline;
+}
