@@ -18,12 +18,11 @@ export class LabelsDialogItemComponent implements OnInit {
 
   @Output() addLabel = new EventEmitter<LabelDialog>();
   @Output() removeLabel = new EventEmitter<number>();
-  // @Output() isEdit = new EventEmitter<boolean>();
+  @Output() isEditOutputProperty = new EventEmitter<boolean>();
 
   isError: boolean;
   isEditActive: boolean;
 
-  // public labelDialog = new LabelDialogModel();
 
   constructor() {
     this.label = new LabelDialogModel();
@@ -55,12 +54,16 @@ export class LabelsDialogItemComponent implements OnInit {
     this.isLabelActive = true;
     this.last = true;
     this.name.setValue(name);
+    this.isEditOutputProperty.emit(this.isEditActive);
+    console.log(this.label)
   }
   cancelLabel(id: number) {
     this.isLabelActive = false;
     if (!this.isEditActive){
     this.deleteLabel(id);
+    return;
     }
     this.isEditActive = false;
+    this.isEditOutputProperty.emit(this.isEditActive);
   }
 }

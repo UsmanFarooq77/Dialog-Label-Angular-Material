@@ -18,11 +18,11 @@
             color="primary" [checked]="label.selected">{{ label.name }}
 
             <span class="edit_delete">
-                <button class="mode_edit_button" matSuffix mat-icon-button aria-label=""
+                <button [disabled]="label.isEdit" class="mode_edit_button" matSuffix mat-icon-button aria-label=""
                     (click)="editLabel(label.name, index)">
                     <mat-icon matSuffix>mode_edit</mat-icon>
                 </button>
-                <button class="delete_button" matSuffix mat-icon-button aria-label="" (click)="deleteLabel(index)">
+                <button [disabled]="label.isEdit" class="delete_button" matSuffix mat-icon-button aria-label="" (click)="deleteLabel(index)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </span>

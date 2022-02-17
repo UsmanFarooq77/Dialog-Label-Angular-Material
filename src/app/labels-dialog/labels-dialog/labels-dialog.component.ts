@@ -15,12 +15,13 @@ export class LabelsDialogComponent implements OnInit {
   labels: Array<LabelDialog>;
   isLabelActive: boolean;
   public labelDialogModel = new LabelDialogModel();
-  // isEditActive: any;
+  isEditActive: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<LabelsDialogComponent>) {
     this.labels = [];
     this.isLabelActive = true;
+    this.isEditActive = false;
   }
 
   ngOnInit(): void {
@@ -34,10 +35,13 @@ export class LabelsDialogComponent implements OnInit {
   }
 
   addLabel(value: LabelDialog) {
+
     
     this.labels[value.id] = value;
     this.isLabelActive = false;
-  
+    this.checkBoxDisableOrEnable(false);
+    this.isEditActive = false;
+
   }
 
   removeLabel(index: any) {
@@ -53,8 +57,18 @@ export class LabelsDialogComponent implements OnInit {
     this.onNoClick();
   }
 
-    // isEdit(value: any) {
-  //   return this.isEditActive = value;
-  // }
+  isEditOutputProperty(value: boolean) {
+    this.checkBoxDisableOrEnable(value);
+    this.isEditActive = value;
+    console.log(value,this.labels)
+  }
+
+  checkBoxDisableOrEnable(value: boolean){
+    for(let i=0; i<this.labels.length; i++){
+      // if(id !== i){
+      this.labels[i].isEdit = value;
+      // }
+    }
+  }
 
 }

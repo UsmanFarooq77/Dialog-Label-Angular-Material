@@ -13,6 +13,7 @@ export class LabelDialogModel implements LabelDialog {
         this.isEdit = false;
     }
 
+
     // isEditActive(value: boolean) {
     //     this.isEdit = value;
     // }

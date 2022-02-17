@@ -3,12 +3,12 @@
         <h1 mat-dialog-title>Title</h1>
     </div>
     <div class="add_button" fxLayoutAlign="end start">
-        <button [disabled]="isLabelActive" mat-button (click)="newLabel()">Add</button>
+        <button [disabled]="isLabelActive || isEditActive" mat-button (click)="newLabel()">Add</button>
     </div>
     <div fxLayout="column" fxFlex="100">
         <ng-container *ngFor="let label of labels; let last=last; let index=index;">
             <app-labels-dialog-item [isLabelActive]="isLabelActive" [last]="last" [label]="label" [index]="index"
-                (addLabel)="addLabel($event)"  (removeLabel)="removeLabel($event)">
+                (addLabel)="addLabel($event)" (isEditOutputProperty)="isEditOutputProperty($event)"  (removeLabel)="removeLabel($event)">
             </app-labels-dialog-item>
         </ng-container>
     </div>
