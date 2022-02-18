@@ -72,11 +72,9 @@ export class LabelsDialogItemComponent implements OnInit {
   checkBoxStatusChange(){
     if(this.label.selected){
       this.label.selected = false;
-      this.addLabel.emit(this.label);
     }
     else {
       this.label.selected = true;
-      this.addLabel.emit(this.label);
     }
   }
 }

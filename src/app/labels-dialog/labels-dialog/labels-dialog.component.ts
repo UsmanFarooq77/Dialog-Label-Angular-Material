@@ -30,13 +30,12 @@ export class LabelsDialogComponent implements OnInit {
 
   newLabel(): void {
     this.isLabelActive = true;
-    console.log(this.labelDialogModel);
     this.labels.push(this.labelDialogModel);
     this.checkBoxDisableOrEnable(true);
   }
 
-  addLabel(value: LabelDialog): void {
-    this.labels[value.id] = value;
+  addLabel(label: LabelDialog): void {
+    this.labels[label.id] = label;
     this.isLabelActive = false;
     this.checkBoxDisableOrEnable(false);
     this.isEditActive = false;
@@ -45,6 +44,7 @@ export class LabelsDialogComponent implements OnInit {
   removeLabel(index: number): void {
     this.isLabelActive = false;
     this.labels.splice(index, 1);
+    this.labels.forEach((label, index) => label.id = index);
   }
 
   saveAllLabels(): void {
@@ -52,15 +52,13 @@ export class LabelsDialogComponent implements OnInit {
     this.close();
   }
 
-  isEditOutputProperty(value: boolean): void {
-    this.checkBoxDisableOrEnable(value);
-    this.isEditActive = value;
+  isEditOutputProperty(isEdit: boolean): void {
+    this.checkBoxDisableOrEnable(isEdit);
+    this.isEditActive = isEdit;
   }
 
-  checkBoxDisableOrEnable(value: boolean): void {
-    for (let index = 0; index < this.labels.length; index++) {
-      this.labels[index].isEdit = value;
-    }
+  checkBoxDisableOrEnable(isEdit: boolean): void {
+    this.labels.forEach((label) => label.isEdit = isEdit );
   }
 
   close(): void {
