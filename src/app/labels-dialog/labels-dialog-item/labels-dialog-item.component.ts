@@ -11,10 +11,10 @@ import { LabelDialogModel } from '../models/labelDialogModel';
 })
 export class LabelsDialogItemComponent implements OnInit {
 
-  @Input('isLabelActive') isLabelActive: any;
-  @Input('last') last: any;
-  @Input('index') index: any;
   @Input('label') label: LabelDialogModel;
+  @Input('isLabelActive') isLabelActive: any;
+  @Input('lastLabel') lastLabel: any;
+  @Input('index') index: any;
 
   @Output() addLabel = new EventEmitter<LabelDialog>();
   @Output() removeLabel = new EventEmitter<number>();
@@ -34,36 +34,49 @@ export class LabelsDialogItemComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  saveLabel(value: string, id: number) {
-    if (value === '') {
+  saveLabel(name: string, id: number): void {
+    if (name === '') {
       this.isError = true;
       return;
     }
 
-    this.label = { id: id, name: value, selected: true, isEdit: false }
+    this.label = { id: id, name: name, selected: true, isEdit: false }
     this.addLabel.emit(this.label);
     this.isLabelActive = false;
-    this.last = false;
+    this.lastLabel = false;
     this.isEditActive = false;
   }
-  deleteLabel(id: number) {
+
+  deleteLabel(id: number): void {
     this.removeLabel.emit(id);
   }
-  editLabel(name: string, id: number) {
+
+  editLabel(name: string, id: number): void {
     this.isEditActive = true;
     this.isLabelActive = true;
-    this.last = true;
+    this.lastLabel = true;
     this.name.setValue(name);
     this.isEditOutputProperty.emit(this.isEditActive);
-    console.log(this.label)
   }
-  cancelLabel(id: number) {
+
+  cancelLabel(id: number): void {
     this.isLabelActive = false;
     if (!this.isEditActive){
     this.deleteLabel(id);
-    return;
     }
     this.isEditActive = false;
+    this.lastLabel = false;
     this.isEditOutputProperty.emit(this.isEditActive);
+  }
+  
+  checkBoxStatusChange(){
+    if(this.label.selected){
+      this.label.selected = false;
+      this.addLabel.emit(this.label);
+    }
+    else {
+      this.label.selected = true;
+      this.addLabel.emit(this.label);
+    }
   }
 }

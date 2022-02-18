@@ -1,28 +1,27 @@
-<div>
+<div id="dialog_label_section">
     <form>
-        <div *ngIf="(isLabelActive && last) || isEditActive">
+        <div *ngIf="(isLabelActive && lastLabel) || isEditActive">
             <mat-form-field appearance="standard">
                 <input matInput [formControl]="name" #lableItem />
                 <mat-error *ngIf="isError">
                     Label is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
-            <button mat-button class="check_circle_button" (click)="saveLabel(lableItem.value, index)" aria-label="">
+            <button mat-icon-button class="check_circle_button" (click)="saveLabel(lableItem.value, index)">
                 <mat-icon>check_circle</mat-icon>&nbsp;
             </button>
-            <button class="cancel_button" (click)="cancelLabel(index)" matSuffix mat-icon-button aria-label="">
+            <button mat-icon-button class="cancel_button" (click)="cancelLabel(index)">
                 <mat-icon>cancel</mat-icon>
             </button>
         </div>
-        <mat-checkbox *ngIf="!isLabelActive || !last" [disabled]="label.isEdit" class="checkbox_hover"
-            color="primary" [checked]="label.selected">{{ label.name }}
-
+        <mat-checkbox *ngIf="!isLabelActive || !lastLabel" [disabled]="label.isEdit" class="checkbox_hover" color="primary"
+            [checked]="label.selected" (change)="checkBoxStatusChange()">{{ label.name }}
             <span class="edit_delete">
-                <button [disabled]="label.isEdit" class="mode_edit_button" matSuffix mat-icon-button aria-label=""
+                <button mat-icon-button [disabled]="label.isEdit" class="mode_edit_button"
                     (click)="editLabel(label.name, index)">
-                    <mat-icon matSuffix>mode_edit</mat-icon>
+                    <mat-icon>mode_edit</mat-icon>
                 </button>
-                <button [disabled]="label.isEdit" class="delete_button" matSuffix mat-icon-button aria-label="" (click)="deleteLabel(index)">
+                <button mat-icon-button [disabled]="label.isEdit" class="delete_button" (click)="deleteLabel(index)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </span>
