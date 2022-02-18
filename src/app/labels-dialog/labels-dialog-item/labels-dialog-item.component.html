@@ -18,7 +18,7 @@
             [checked]="label.selected" (change)="checkBoxStatusChange()">{{ label.name }}
             <span class="edit_delete">
                 <button mat-icon-button [disabled]="label.isEdit" class="mode_edit_button"
-                    (click)="editLabel(label.name, index)">
+                    (click)="editLabel(label.name)">
                     <mat-icon>mode_edit</mat-icon>
                 </button>
                 <button mat-icon-button [disabled]="label.isEdit" class="delete_button" (click)="deleteLabel(index)">

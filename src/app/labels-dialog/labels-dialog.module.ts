@@ -19,14 +19,14 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule,
     FlexLayoutModule,
     MatCheckboxModule,
-    ReactiveFormsModule,
     MatIconModule
   ]
 })

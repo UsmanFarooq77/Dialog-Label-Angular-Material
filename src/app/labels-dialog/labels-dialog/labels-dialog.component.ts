@@ -47,11 +47,6 @@ export class LabelsDialogComponent implements OnInit {
     this.labels.forEach((label, index) => label.id = index);
   }
 
-  saveAllLabels(): void {
-    console.log("All Labels are:", this.labels);
-    this.close();
-  }
-
   isEditOutputProperty(isEdit: boolean): void {
     this.checkBoxDisableOrEnable(isEdit);
     this.isEditActive = isEdit;
@@ -59,6 +54,11 @@ export class LabelsDialogComponent implements OnInit {
 
   checkBoxDisableOrEnable(isEdit: boolean): void {
     this.labels.forEach((label) => label.isEdit = isEdit );
+  }
+
+  saveAllLabels(): void {
+    console.log("All Labels are:", this.labels);
+    this.close();
   }
 
   close(): void {

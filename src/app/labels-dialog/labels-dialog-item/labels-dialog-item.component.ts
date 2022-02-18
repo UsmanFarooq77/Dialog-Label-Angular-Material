@@ -51,7 +51,7 @@ export class LabelsDialogItemComponent implements OnInit {
     this.removeLabel.emit(id);
   }
 
-  editLabel(name: string, id: number): void {
+  editLabel(name: string): void {
     this.isEditActive = true;
     this.isLabelActive = true;
     this.lastLabel = true;
