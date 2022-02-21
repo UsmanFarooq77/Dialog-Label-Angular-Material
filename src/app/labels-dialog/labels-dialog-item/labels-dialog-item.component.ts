@@ -15,13 +15,13 @@ export class LabelsDialogItemComponent implements OnInit {
   @Input('isLabelActive') isLabelActive: any;
   @Input('lastLabel') lastLabel: any;
   @Input('index') index: any;
+  @Input('isEditActive') isEditActive: any;
 
-  @Output() addLabel = new EventEmitter<LabelDialog>();
+  @Output() addLabel = new EventEmitter<LabelDialogModel>();
   @Output() removeLabel = new EventEmitter<number>();
   @Output() isEditOutputProperty = new EventEmitter<boolean>();
 
   isError: boolean;
-  isEditActive: boolean;
 
 
   constructor() {
@@ -32,19 +32,19 @@ export class LabelsDialogItemComponent implements OnInit {
 
   name = new FormControl('', Validators.required);
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
   saveLabel(name: string, id: number): void {
     if (name === '') {
       this.isError = true;
       return;
     }
 
-    this.label = { id: id, name: name, selected: true, isEdit: false }
-    this.addLabel.emit(this.label);
+    this.label = { id: id, name: name, selected: true };
     this.isLabelActive = false;
     this.lastLabel = false;
     this.isEditActive = false;
+    this.addLabel.emit(this.label);
   }
 
   deleteLabel(id: number): void {

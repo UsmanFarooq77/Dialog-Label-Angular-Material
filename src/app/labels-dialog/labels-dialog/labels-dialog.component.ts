@@ -31,13 +31,11 @@ export class LabelsDialogComponent implements OnInit {
   newLabel(): void {
     this.isLabelActive = true;
     this.labels.push(this.labelDialogModel);
-    this.checkBoxDisableOrEnable(true);
   }
 
-  addLabel(label: LabelDialog): void {
+  addLabel(label: LabelDialogModel): void {
     this.labels[label.id] = label;
     this.isLabelActive = false;
-    this.checkBoxDisableOrEnable(false);
     this.isEditActive = false;
   }
 
@@ -48,12 +46,9 @@ export class LabelsDialogComponent implements OnInit {
   }
 
   isEditOutputProperty(isEdit: boolean): void {
-    this.checkBoxDisableOrEnable(isEdit);
     this.isEditActive = isEdit;
-  }
-
-  checkBoxDisableOrEnable(isEdit: boolean): void {
-    this.labels.forEach((label) => label.isEdit = isEdit );
+    if(this.isEditActive)
+    this.isLabelActive = !isEdit;
   }
 
   saveAllLabels(): void {

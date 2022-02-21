@@ -1,6 +1,6 @@
 <div id="dialog_label_section">
     <form>
-        <div *ngIf="(isLabelActive && lastLabel) || isEditActive">
+        <div *ngIf="(isLabelActive && lastLabel) || (isEditActive && isLabelActive)">
             <mat-form-field appearance="standard">
                 <input matInput [formControl]="name" #lableItem />
                 <mat-error *ngIf="isError">
@@ -14,14 +14,14 @@
                 <mat-icon>cancel</mat-icon>
             </button>
         </div>
-        <mat-checkbox *ngIf="!isLabelActive || !lastLabel" [disabled]="label.isEdit" class="checkbox_hover" color="primary"
+        <mat-checkbox *ngIf="!isLabelActive || !lastLabel" [disabled]="(isLabelActive && !lastLabel) || isEditActive" class="checkbox_hover" color="primary"
             [checked]="label.selected" (change)="checkBoxStatusChange()">{{ label.name }}
             <span class="edit_delete">
-                <button mat-icon-button [disabled]="label.isEdit" class="mode_edit_button"
+                <button mat-icon-button [disabled]="(isLabelActive && !lastLabel) || isEditActive" class="mode_edit_button"
                     (click)="editLabel(label.name)">
                     <mat-icon>mode_edit</mat-icon>
-                </button>
-                <button mat-icon-button [disabled]="label.isEdit" class="delete_button" (click)="deleteLabel(index)">
+                </button> 
+                <button mat-icon-button [disabled]="(isLabelActive && !lastLabel) || isEditActive" class="delete_button" (click)="deleteLabel(index)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </span>
