@@ -14,14 +14,16 @@
                 <mat-icon>cancel</mat-icon>
             </button>
         </div>
-        <mat-checkbox *ngIf="!isLabelActive || !lastLabel" [disabled]="(isLabelActive && !lastLabel) || isEditActive" class="checkbox_hover" color="primary"
-            [checked]="label.selected" (change)="checkBoxStatusChange()">{{ label.name }}
+        <mat-checkbox *ngIf="!isLabelActive || !lastLabel" [disabled]="(isLabelActive && !lastLabel) || isEditActive"
+            class="checkbox_hover" color="primary" [checked]="label.selected" (change)="checkBoxStatusChange()">{{
+            label.name }}
             <span class="edit_delete">
-                <button mat-icon-button [disabled]="(isLabelActive && !lastLabel) || isEditActive" class="mode_edit_button"
-                    (click)="editLabel(label.name)">
+                <button mat-icon-button [disabled]="(isLabelActive && !lastLabel) || isEditActive"
+                    class="mode_edit_button" (click)="editLabel(label.name)">
                     <mat-icon>mode_edit</mat-icon>
-                </button> 
-                <button mat-icon-button [disabled]="(isLabelActive && !lastLabel) || isEditActive" class="delete_button" (click)="deleteLabel(index)">
+                </button>
+                <button mat-icon-button [disabled]="(isLabelActive && !lastLabel) || isEditActive" class="delete_button"
+                    (click)="deleteLabel(index)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </span>

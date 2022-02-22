@@ -8,15 +8,16 @@
     <div fxLayout="column" fxFlex="100">
         <ng-container *ngFor="let label of labels; let lastLabel=last; let index=index;">
             <app-labels-dialog-item [label]="label" [isLabelActive]="isLabelActive" [lastLabel]="lastLabel"
-                [index]="index" [isEditActive]="isEditActive" (addLabel)="addLabel($event)" (isEditOutputProperty)="isEditOutputProperty($event)"
-                (removeLabel)="removeLabel($event)">
+                [index]="index" [isEditActive]="isEditActive" (addLabel)="addLabel($event)"
+                (isEditOutputProperty)="isEditOutputProperty($event)" (removeLabel)="removeLabel($event)">
             </app-labels-dialog-item>
         </ng-container>
     </div>
     <div fxLayoutAlign="end start">
         <div mat-dialog-actions>
             <button mat-button (click)="close()">Cancel</button>
-            <button mat-button [disabled]="isLabelActive" color="primary" (click)="saveAllLabels()">Ok</button>
+            <button mat-button [disabled]="isLabelActive || isEditActive" color="primary"
+                (click)="saveAllLabels()">Ok</button>
         </div>
     </div>
 </div>

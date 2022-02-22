@@ -1,7 +1,6 @@
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { LabelDialog } from '../interfaces/labelDialog';
 import { LabelDialogModel } from '../models/labelDialogModel';
 
 @Component({
@@ -32,23 +31,18 @@ export class LabelsDialogItemComponent implements OnInit {
 
   name = new FormControl('', Validators.required);
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  saveLabel(name: string, id: number): void {
+  saveLabel(name: string, id: string): void {
     if (name === '') {
       this.isError = true;
       return;
     }
-
-    this.label = { id: id, name: name, selected: true };
+    this.label = { id: id, name: name, selected: this.label.selected };
     this.isLabelActive = false;
     this.lastLabel = false;
     this.isEditActive = false;
     this.addLabel.emit(this.label);
-  }
-
-  deleteLabel(id: number): void {
-    this.removeLabel.emit(id);
   }
 
   editLabel(name: string): void {
@@ -59,18 +53,22 @@ export class LabelsDialogItemComponent implements OnInit {
     this.isEditOutputProperty.emit(this.isEditActive);
   }
 
+  deleteLabel(id: number): void {
+    this.removeLabel.emit(id);
+  }
+
   cancelLabel(id: number): void {
     this.isLabelActive = false;
-    if (!this.isEditActive){
-    this.deleteLabel(id);
+    if (!this.isEditActive) {
+      this.deleteLabel(id);
     }
     this.isEditActive = false;
     this.lastLabel = false;
     this.isEditOutputProperty.emit(this.isEditActive);
   }
-  
-  checkBoxStatusChange(){
-    if(this.label.selected){
+
+  checkBoxStatusChange() {
+    if (this.label.selected) {
       this.label.selected = false;
     }
     else {

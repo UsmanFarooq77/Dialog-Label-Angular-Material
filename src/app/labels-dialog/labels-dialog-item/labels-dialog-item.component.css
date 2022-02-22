@@ -1,36 +1,37 @@
-
 .check_circle_button {
-    color: #7fdf7f;
-    padding: 0px;
-    min-width: 5px !important;
-    line-height: 0px;
-    width: 22px;
-    height: 21px;
-    border-radius: 50px !important;
-    margin-right: 3px;
+  color: #7fdf7f;
+  padding: 0px;
+  min-width: 5px !important;
+  line-height: 0px;
+  width: 22px;
+  height: 21px;
+  border-radius: 50px !important;
+  margin-right: 3px;
 }
-.cancel_button{
-    padding: 0px;
-    min-width: 5px !important;
-    line-height: 0px;
-    width: 22px;
-    height: 21px;
-    border-radius: 50px !important;
+.cancel_button {
+  padding: 0px;
+  min-width: 5px !important;
+  line-height: 0px;
+  width: 22px;
+  height: 21px;
+  border-radius: 50px !important;
 }
-.mode_edit_button, .delete_button {
-    padding: 0px;
-    min-width: 5px !important;
-    line-height: 0px;
-    width: 22px;
-    height: 21px;
-    border-radius: 50px !important;
+.mode_edit_button,
+.delete_button {
+  padding: 0px;
+  min-width: 5px !important;
+  line-height: 0px;
+  width: 22px;
+  height: 21px;
+  border-radius: 50px !important;
 }
-.mode_edit_button .mat-icon, .delete_button .mat-icon{
-    color: #606060;
+.mode_edit_button .mat-icon,
+.delete_button .mat-icon {
+  color: #606060;
 }
-.edit_delete{
-    display: none;
+.edit_delete {
+  display: none;
 }
 .checkbox_hover:hover .edit_delete {
-    display: inline;
+  display: inline;
 }

@@ -34,7 +34,9 @@ export class LabelsDialogComponent implements OnInit {
   }
 
   addLabel(label: LabelDialogModel): void {
-    this.labels[label.id] = label;
+
+    this.labels[Number(label.id)] = label;
+    this.updateIds();
     this.isLabelActive = false;
     this.isEditActive = false;
   }
@@ -42,13 +44,17 @@ export class LabelsDialogComponent implements OnInit {
   removeLabel(index: number): void {
     this.isLabelActive = false;
     this.labels.splice(index, 1);
-    this.labels.forEach((label, index) => label.id = index);
+    this.updateIds();
   }
 
   isEditOutputProperty(isEdit: boolean): void {
     this.isEditActive = isEdit;
-    if(this.isEditActive)
-    this.isLabelActive = !isEdit;
+    if (this.isEditActive)
+      this.isLabelActive = !isEdit;
+  }
+
+  updateIds() {
+    this.labels.forEach((label, index) => label.id = String(index += 1));
   }
 
   saveAllLabels(): void {
