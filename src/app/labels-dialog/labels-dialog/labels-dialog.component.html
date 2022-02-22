@@ -15,7 +15,7 @@
     </div>
     <div fxLayoutAlign="end start">
         <div mat-dialog-actions>
-            <button mat-button (click)="close()">Cancel</button>
+            <button mat-button [disabled]="isLabelActive || isEditActive" (click)="close()">Cancel</button>
             <button mat-button [disabled]="isLabelActive || isEditActive" color="primary"
                 (click)="saveAllLabels()">Ok</button>
         </div>

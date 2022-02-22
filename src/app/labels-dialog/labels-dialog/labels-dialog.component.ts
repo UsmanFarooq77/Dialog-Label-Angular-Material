@@ -1,6 +1,6 @@
 
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LabelDialog } from '../interfaces/labelDialog';
 import { LabelDialogModel } from '../models/labelDialogModel';
 
@@ -18,15 +18,14 @@ export class LabelsDialogComponent implements OnInit {
   public labelDialogModel = new LabelDialogModel();
 
   constructor(
-    public dialogRef: MatDialogRef<LabelsDialogComponent>) {
-    this.labels = [];
-    this.isLabelActive = true;
+    public dialogRef: MatDialogRef<LabelsDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public labeling: { title: "Window Labels", labels:  Array<LabelDialog> }) {
+    this.labels = labeling.labels;
+    this.isLabelActive = false;
     this.isEditActive = false;
   }
 
-  ngOnInit(): void {
-    this.labels.push(this.labelDialogModel);
-  }
+  ngOnInit(): void {}
 
   newLabel(): void {
     this.isLabelActive = true;
@@ -58,8 +57,8 @@ export class LabelsDialogComponent implements OnInit {
   }
 
   saveAllLabels(): void {
-    console.log("All Labels are:", this.labels);
-    this.close();
+    // console.log("All Labels are:", this.labels); For verify that data is submitted successfully.
+    this.dialogRef.close(this.labels);
   }
 
   close(): void {
