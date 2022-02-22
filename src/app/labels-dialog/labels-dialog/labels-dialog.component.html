@@ -1,6 +1,6 @@
 <div fxLayout="column" fxFlexFill>
     <div class="header_title" fxLayout="row">
-        <h1 mat-dialog-title>Title</h1>
+        <h1 mat-dialog-title>{{labeling.title}}</h1>
     </div>
     <div class="add_button" fxLayoutAlign="end start">
         <button [disabled]="isLabelActive || isEditActive" mat-button (click)="newLabel()">Add</button>

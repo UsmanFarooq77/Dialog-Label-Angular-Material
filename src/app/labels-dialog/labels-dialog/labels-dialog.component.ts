@@ -19,13 +19,15 @@ export class LabelsDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<LabelsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public labeling: { title: "Window Labels", labels:  Array<LabelDialog> }) {
-    this.labels = labeling.labels;
+    @Inject(MAT_DIALOG_DATA) public labeling: { title: "", labels: Array<LabelDialog> }) {
+    this.labels = [];
     this.isLabelActive = false;
     this.isEditActive = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.labels.push(...this.labeling.labels);
+  }
 
   newLabel(): void {
     this.isLabelActive = true;
@@ -33,7 +35,6 @@ export class LabelsDialogComponent implements OnInit {
   }
 
   addLabel(label: LabelDialogModel): void {
-
     this.labels[Number(label.id)] = label;
     this.updateIds();
     this.isLabelActive = false;
@@ -48,8 +49,7 @@ export class LabelsDialogComponent implements OnInit {
 
   isEditOutputProperty(isEdit: boolean): void {
     this.isEditActive = isEdit;
-    if (this.isEditActive)
-      this.isLabelActive = !isEdit;
+    if (this.isEditActive) { this.isLabelActive = !isEdit; }
   }
 
   updateIds() {

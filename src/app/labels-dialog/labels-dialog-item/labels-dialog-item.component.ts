@@ -1,6 +1,6 @@
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LabelDialogModel } from '../models/labelDialogModel';
 
 @Component({
@@ -20,25 +20,22 @@ export class LabelsDialogItemComponent implements OnInit {
   @Output() removeLabel = new EventEmitter<number>();
   @Output() isEditOutputProperty = new EventEmitter<boolean>();
 
-  isError: boolean;
+  labelForm: FormGroup;
 
 
   constructor() {
     this.label = new LabelDialogModel();
     this.isEditActive = false;
-    this.isError = false;
+    this.labelForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+    });
   }
-
-  name = new FormControl('', Validators.required);
 
   ngOnInit(): void { }
 
-  saveLabel(name: string, id: string): void {
-    if (name === '') {
-      this.isError = true;
-      return;
-    }
-    this.label = { id: id, name: name, selected: this.label.selected };
+  saveLabel(id: string): void {
+    if (this.labelForm.value.name === '') return;
+    this.label = { id: id, name: this.labelForm.value.name, selected: this.label.selected };
     this.isLabelActive = false;
     this.lastLabel = false;
     this.isEditActive = false;
@@ -49,7 +46,7 @@ export class LabelsDialogItemComponent implements OnInit {
     this.isEditActive = true;
     this.isLabelActive = true;
     this.lastLabel = true;
-    this.name.setValue(name);
+    this.labelForm.setValue({ name: name })
     this.isEditOutputProperty.emit(this.isEditActive);
   }
 
@@ -59,20 +56,16 @@ export class LabelsDialogItemComponent implements OnInit {
 
   cancelLabel(id: number): void {
     this.isLabelActive = false;
-    if (!this.isEditActive) {
-      this.deleteLabel(id);
-    }
+    if (!this.isEditActive) { this.deleteLabel(id); }
     this.isEditActive = false;
     this.lastLabel = false;
     this.isEditOutputProperty.emit(this.isEditActive);
   }
 
   checkBoxStatusChange() {
-    if (this.label.selected) {
-      this.label.selected = false;
-    }
-    else {
-      this.label.selected = true;
-    }
+    if (this.label.selected) { this.label.selected = false; }
+    else { this.label.selected = true; }
   }
+
+  get labelName() { return this.labelForm.controls; }
 }
