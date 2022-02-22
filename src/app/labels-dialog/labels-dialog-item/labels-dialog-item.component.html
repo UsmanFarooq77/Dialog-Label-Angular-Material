@@ -1,5 +1,5 @@
 <div id="dialog_label_section">
-    <form [formGroup]="labelForm" (ngSubmit)="saveLabel(index)">
+    <form [formGroup]="labelForm" (ngSubmit)="saveLabel()">
         <div *ngIf="(isLabelActive && lastLabel) || (isEditActive && isLabelActive)">
             <mat-form-field appearance="standard">
                 <input matInput formControlName="name" />
@@ -10,7 +10,7 @@
             <button type="submit" mat-icon-button class="check_circle_button">
                 <mat-icon>check_circle</mat-icon>&nbsp;
             </button>
-            <button type="button" mat-icon-button class="cancel_button" (click)="cancelLabel(index)">
+            <button type="button" mat-icon-button class="cancel_button" (click)="cancelLabel()">
                 <mat-icon>cancel</mat-icon>
             </button>
         </div>
@@ -22,8 +22,8 @@
                     class="mode_edit_button" (click)="editLabel(label.name)">
                     <mat-icon>mode_edit</mat-icon>
                 </button>
-                <button type="button" mat-icon-button [disabled]="(isLabelActive && !lastLabel) || isEditActive" class="delete_button"
-                    (click)="deleteLabel(index)">
+                <button type="button" mat-icon-button [disabled]="(isLabelActive && !lastLabel) || isEditActive"
+                    class="delete_button" (click)="deleteLabel()">
                     <mat-icon>delete</mat-icon>
                 </button>
             </span>

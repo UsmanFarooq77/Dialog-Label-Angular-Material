@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LabelDialogModel } from '../models/labelDialogModel';
@@ -16,12 +15,11 @@ export class LabelsDialogItemComponent implements OnInit {
   @Input('index') index: any;
   @Input('isEditActive') isEditActive: any;
 
-  @Output() addLabel = new EventEmitter<LabelDialogModel>();
-  @Output() removeLabel = new EventEmitter<number>();
+  @Output() addLabelOutputProperty = new EventEmitter<LabelDialogModel>();
+  @Output() removeLabelOutputProperty = new EventEmitter<number>();
   @Output() isEditOutputProperty = new EventEmitter<boolean>();
 
   labelForm: FormGroup;
-
 
   constructor() {
     this.label = new LabelDialogModel();
@@ -33,30 +31,30 @@ export class LabelsDialogItemComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  saveLabel(id: string): void {
+  saveLabel(): void {
     if (this.labelForm.value.name === '') return;
-    this.label = { id: id, name: this.labelForm.value.name, selected: this.label.selected };
+    this.label = { id: this.index, name: this.labelForm.value.name, selected: this.label.selected };
     this.isLabelActive = false;
     this.lastLabel = false;
     this.isEditActive = false;
-    this.addLabel.emit(this.label);
+    this.addLabelOutputProperty.emit(this.label);
   }
 
   editLabel(name: string): void {
     this.isEditActive = true;
     this.isLabelActive = true;
     this.lastLabel = true;
-    this.labelForm.setValue({ name: name })
+    this.labelForm.setValue({ name: name });
     this.isEditOutputProperty.emit(this.isEditActive);
   }
 
-  deleteLabel(id: number): void {
-    this.removeLabel.emit(id);
+  deleteLabel(): void {
+    this.removeLabelIntoOutputProperty();
   }
 
-  cancelLabel(id: number): void {
+  cancelLabel(): void {
     this.isLabelActive = false;
-    if (!this.isEditActive) { this.deleteLabel(id); }
+    if (!this.isEditActive) { this.removeLabelIntoOutputProperty(); }
     this.isEditActive = false;
     this.lastLabel = false;
     this.isEditOutputProperty.emit(this.isEditActive);
@@ -65,6 +63,10 @@ export class LabelsDialogItemComponent implements OnInit {
   checkBoxStatusChange() {
     if (this.label.selected) { this.label.selected = false; }
     else { this.label.selected = true; }
+  }
+
+  removeLabelIntoOutputProperty() {
+    this.removeLabelOutputProperty.emit(this.index)
   }
 
   get labelName() { return this.labelForm.controls; }

@@ -1,4 +1,3 @@
-
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LabelDialog } from '../interfaces/labelDialog';
@@ -47,7 +46,7 @@ export class LabelsDialogComponent implements OnInit {
     this.updateIds();
   }
 
-  isEditOutputProperty(isEdit: boolean): void {
+  isEdit(isEdit: boolean): void {
     this.isEditActive = isEdit;
     if (this.isEditActive) { this.isLabelActive = !isEdit; }
   }
@@ -64,5 +63,4 @@ export class LabelsDialogComponent implements OnInit {
   close(): void {
     this.dialogRef.close();
   }
-
 }
